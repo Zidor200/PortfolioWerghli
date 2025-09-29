@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohamedali Werghli - Photographer & High-End Retoucher</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for the Scroll-to-Top icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Custom styles for the clean, minimal aesthetic */
+        :root {
+            --primary-color: #212121;
+            --secondary-text: #6b7280;
+            --background: #f7f7f7;
+            --card-bg: #ffffff;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--primary-color);
+            background-color: var(--background);
+        }
+        .header-font {
+            font-family: 'Playfair Display', serif;
+        }
+        .section-title {
+            font-size: 3rem;
+            line-height: 1.1;
+        }
+        /* Style for the fixed scroll-to-top button */
+        #scrollTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 14px;
+            border-radius: 9999px;
+            opacity: 0.85;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        #scrollTopBtn:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        /* Responsive gallery grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        @media (min-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Tailwind CSS configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        'primary-dark': '#212121',
+                        'subtle-gray': '#f7f7f7',
+                        'mid-gray': '#6b7280',
+                        'white-card': '#ffffff',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Navigation (Sticky) -->
+    <header id="navbar" class="sticky top-0 z-50 bg-white-card/95 backdrop-blur-sm shadow-sm py-4 border-b border-gray-100">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-between items-center gap-4">
+            <h1 class="text-xl font-serif font-bold text-primary-dark tracking-wider">
+                M. WERGLI
+            </h1>
+            <div class="flex flex-grow justify-center space-x-4 sm:space-x-8 text-sm font-semibold text-mid-gray order-3 md:order-2 w-full md:w-auto mt-2 md:mt-0">
+                <a href="#latest" class="hover:text-primary-dark transition duration-150">My Latest</a>
+                <a href="#best" class="hover:text-primary-dark transition duration-150">My Best</a>
+                <a href="#other" class="hover:text-primary-dark transition duration-150">Other Creations</a>
+            </div>
+            <a href="#contact" class="px-4 py-2 bg-primary-dark text-white text-sm font-semibold rounded-lg hover:bg-black transition duration-300 shadow-md order-2 md:order-3">
+                Get In Touch
+            </a>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto">
+
+        <!-- 1. Welcoming Page (Home/Hero Section) -->
+        <section id="home" class="relative overflow-hidden pt-20 pb-20 sm:pt-32 sm:pb-32 min-h-screen flex items-center justify-center">
+
+            <!-- Single Background Image (Full Cover) -->
+            <div class="absolute inset-0 z-0 bg-cover bg-center"
+                 style="background-image: url('https://placehold.co/1920x1080/4a4a4a/ffffff?text=YOUR+HIGH-IMPACT+IMAGE+HERE');">
+            </div>
+
+            <!-- Dark Overlay for Readability -->
+            <div class="absolute inset-0 z-0 bg-primary-dark opacity-40"></div>
+
+            <!-- Content Box -->
+            <div class="relative z-10 px-4 sm:px-6 lg:px-8 text-center bg-white-card/90 py-20 rounded-xl max-w-5xl mx-auto shadow-2xl backdrop-blur-sm border border-gray-100">
+                <p class="text-sm uppercase tracking-widest text-mid-gray mb-3">Photographer & High-End Retoucher</p>
+                <h2 class="header-font text-6xl sm:text-8xl font-bold mb-6 text-primary-dark">
+                    HELLO, I'M MOHAMEDALI WERGHILI
+                </h2>
+                <p class="text-xl font-light text-mid-gray max-w-3xl mx-auto">
+                    Welcome to my portfolio. This is where I share my journey, the inspiration, and the meticulous techniques behind every creation.
+                </p>
+            </div>
+        </section>
+
+        <!-- 2. About Me -->
+        <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 bg-white-card border-t border-gray-200 shadow-inner">
+            <h2 class="section-title header-font font-bold mb-12 text-center">About Me</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-start max-w-6xl mx-auto">
+                <!-- Image Section -->
+                <div class="rounded-xl overflow-hidden shadow-2xl">
+                    <img src="https://placehold.co/600x600/212121/ffffff?text=M.+WERGLI+PORTRAIT" alt="Mohamedali Werghili portrait" class="w-full h-auto object-cover">
+                </div>
+                <!-- Text Section (from Slide 2) -->
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-primary-dark">Presentation</h3>
+                    <p class="text-mid-gray mb-6">
+                        Salam I'm mohamedaliwergli. I'm excited to share my self-portrait with you. This piece is a reflection of who I am, my emotions, and my journey. Creating a self-portrait has been a deeply personal and introspective process, and I'm thrilled to walk you through the inspiration, symbolism, and techniques behind it.
+                    </p>
+                    <h3 class="text-2xl font-semibold mb-4 text-primary-dark">My Career & My Training</h3>
+                    <ul class="text-sm text-mid-gray space-y-2">
+                        <li>My career began in 2015 in phone photography, specializing in street photography, while continuing self-training.</li>
+                        <li>In 2017, I transitioned to DSLR cameras, complemented by paid follow-up online lessons and intensive training in image editing, visual composition, color theory, and creative application.</li>
+                        <li>In 2018, I joined the Academy of Arts in Carthage (known as Université Centrale until 2021).</li>
+                        <li>From 2021 to 2022, I worked as a videographer at Ali Janoubiya TV.</li>
+                        <li>In 2022, I launched my artistic project focused on self-portraits, alongside freelance work as a product, events, and portrait photographer, including studio photography.</li>
+                        <li>In 2024, I collaborated with the Royal Salif Al-Sham Band.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. My Vision & 4. My Mission (Combined for visual impact) -->
+        <section class="py-20 px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                <div id="vision" class="bg-primary-dark text-white p-8 rounded-xl shadow-2xl">
+                    <h2 class="header-font text-4xl font-bold mb-4 border-b border-gray-600 pb-2">My Vision</h2>
+                    <p class="text-xl font-light">
+                        My vision in photography is the ability to **encapsulate a story with its details, feelings and emotions in a single moment.**
+                    </p>
+                </div>
+
+                <div id="mission" class="bg-white-card text-primary-dark p-8 rounded-xl shadow-2xl border border-gray-200">
+                    <h2 class="header-font text-4xl font-bold mb-4 border-b border-gray-300 pb-2">My Mission</h2>
+                    <p class="text-lg">
+                        Our mission is to share with our clients the desire and objective "to enable them to sell their products more effectively in larger markets and to obtain a good financial return while maintaining our will to create and innovate in a renewed and innovative way, as well as ensuring our continuity and progress in our field of work."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. My Values -->
+        <section id="values" class="py-20 px-4 sm:px-6 lg:px-8 bg-white-card border-t border-gray-200">
+            <h2 class="section-title header-font font-bold mb-12 text-center">Core Values</h2>
+            <div class="flex justify-center flex-wrap gap-4 max-w-4xl mx-auto">
+                <span class="px-6 py-3 bg-primary-dark text-white rounded-full text-lg font-semibold shadow-md">Créativité</span>
+                <span class="px-6 py-3 bg-white border-2 border-primary-dark text-primary-dark rounded-full text-lg font-semibold shadow-md">Originalité</span>
+                <span class="px-6 py-3 bg-primary-dark text-white rounded-full text-lg font-semibold shadow-md">Passion</span>
+                <span class="px-6 py-3 bg-white border-2 border-primary-dark text-primary-dark rounded-full text-lg font-semibold shadow-md">Authenticité</span>
+                <span class="px-6 py-3 bg-primary-dark text-white rounded-full text-lg font-semibold shadow-md">Engagement</span>
+            </div>
+            <p class="text-center text-md text-mid-gray mt-8 max-w-3xl mx-auto">
+                These values are the foundation of my work, helping me continue my journey as a photographer and artist and gain the trust of everyone I deal with, from companies to individual clients.
+            </p>
+        </section>
+
+        <!-- Portfolio Sections (Content for Latest, Best, Other Creations) -->
+        <section class="py-20 px-4 sm:px-6 lg:px-8">
+            <h2 class="section-title header-font font-bold mb-16 text-center">My Work</h2>
+
+            <!-- My Latest Creations (Theme 3) -->
+            <div id="latest" class="mb-20 pt-4">
+                <h3 class="header-font text-4xl font-bold mb-6 border-b pb-2">My Latest Creations (Theme 3: Infinity Collection)</h3>
+                <p class="text-mid-gray mb-8 max-w-4xl">
+                    The **(Infinity) collection** is my favorite and the most delicate of all my artistic projects, combining self-portraits and wide landscapes in one moment.
+                </p>
+                <div class="gallery-grid">
+                    <!-- Placeholder Images for Theme 3 -->
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl aspect-square"><img src="https://placehold.co/600x600/4c4d4d/ffffff?text=LATEST+1" alt="Latest Creation 1" class="w-full h-full object-cover"></div>
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl aspect-square"><img src="https://placehold.co/600x600/5e63b6/ffffff?text=LATEST+2" alt="Latest Creation 2" class="w-full h-full object-cover"></div>
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl aspect-square"><img src="https://placehold.co/600x600/9b59b6/ffffff?text=LATEST+3" alt="Latest Creation 3" class="w-full h-full object-cover"></div>
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl aspect-square"><img src="https://placehold.co/600x600/16a085/ffffff?text=LATEST+4" alt="Latest Creation 4" class="w-full h-full object-cover"></div>
+                </div>
+            </div>
+
+            <!-- My Best Creations (Creation 1 & 2) -->
+            <div id="best" class="mb-20 pt-4 border-t pt-16 border-gray-200">
+                <h3 class="header-font text-4xl font-bold mb-6 border-b pb-2">My Best Creations</h3>
+
+                <!-- Creation 1: Tunis Night View (from Slide 10) -->
+                <div class="mb-10 bg-white-card p-6 rounded-xl shadow-xl border border-gray-100">
+                    <h4 class="text-2xl font-semibold mb-3">Creation 1: The Tunis Panorama</h4>
+                    <p class="text-sm text-mid-gray mb-4">
+                        This is a picture of the capital city of Tunis from Mount Sidi Bouhssine and his shrine, which overlooks most of the capital city of Tunis. As for the technical aspect, I collected approximately 14 pictures of this view and combined them into one beautiful scene.
+                    </p>
+                    <img src="https://placehold.co/1200x500/000033/ffffff?text=BEST+CREATION+1:+TUNIS+NIGHT+COMPOSITE" alt="Best Creation 1 - Tunis night composite" class="w-full rounded-lg shadow-lg">
+                </div>
+
+                <!-- Creation 2: Concentration Flow (from Slide 11) -->
+                <div class="bg-white-card p-6 rounded-xl shadow-xl border border-gray-100">
+                    <h4 class="text-2xl font-semibold mb-3">Creation 2: Moment of Concentration</h4>
+                    <p class="text-sm text-mid-gray mb-4">
+                        This is a translation of a moment of concentration and mental flow that I feel when I create a new project, and I expressed it with this atmosphere that I was inspired by my favorite artist and from whom I learned a lot (Eric Alamos).
+                    </p>
+                    <img src="https://placehold.co/1200x500/221100/ffffff?text=BEST+CREATION+2:+MENTAL+FLOW+SCENE" alt="Best Creation 2 - Concentration scene" class="w-full rounded-lg shadow-lg">
+                </div>
+            </div>
+
+            <!-- Other Creations (Themes 1 & 2) -->
+            <div id="other" class="mb-20 pt-4 border-t pt-16 border-gray-200">
+                <h3 class="header-font text-4xl font-bold mb-8 border-b pb-2">Other Creations (Themes 1 & 2)</h3>
+
+                <!-- Theme 2: Warm Psychological -->
+                <h4 class="text-2xl font-semibold mb-4">Theme 2: Warm Psychological State</h4>
+                <p class="text-mid-gray mb-6 max-w-4xl">
+                    This is a collection of self-portraits, the most prominent of which are warm colors, and it may be a reflection of my active psychological state during this period.
+                </p>
+                <div class="gallery-grid mb-12">
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl aspect-square"><img src="https://placehold.co/600x600/fbb34e/ffffff?text=OTHER+2A" alt="Theme 2 Image A" class="w-full h-full object-cover"></div>
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl aspect-square"><img src="https://placehold.co/600x600/f87171/ffffff?text=OTHER+2B" alt="Theme 2 Image B" class="w-full h-full object-cover"></div>
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl aspect-square"><img src="https://placehold.co/600x600/d97706/ffffff?text=OTHER+2C" alt="Theme 2 Image C" class="w-full h-full object-cover"></div>
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl aspect-square"><img src="https://placehold.co/600x600/7c2d12/ffffff?text=OTHER+2D" alt="Theme 2 Image D" class="w-full h-full object-cover"></div>
+                </div>
+
+                <!-- Theme 1: Blue Dominance (Days Project) -->
+                <h4 class="text-2xl font-semibold mb-4 mt-8">Theme 1: Blue Dominance (Days Project)</h4>
+                <p class="text-mid-gray mb-6 max-w-4xl">
+                    One of my most beautiful works in the (Days) project. I was influenced during this period by contemplating the sky and its symbolism. The blue color is very dominant, along with my body positions that are almost contemplative.
+                </p>
+                <div class="gallery-grid">
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl aspect-square"><img src="https://placehold.co/600x600/1e3a8a/ffffff?text=OTHER+1A" alt="Theme 1 Image A" class="w-full h-full object-cover"></div>
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl aspect-square"><img src="https://placehold.co/600x600/3b82f6/ffffff?text=OTHER+1B" alt="Theme 1 Image B" class="w-full h-full object-cover"></div>
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl aspect-square"><img src="https://placehold.co/600x600/93c5fd/ffffff?text=OTHER+1C" alt="Theme 1 Image C" class="w-full h-full object-cover"></div>
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl aspect-square"><img src="https://placehold.co/600x600/60a5fa/ffffff?text=OTHER+1D" alt="Theme 1 Image D" class="w-full h-full object-cover"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. The Steps of Our Collaboration -->
+        <section id="steps" class="py-20 px-4 sm:px-6 lg:px-8 bg-subtle-gray border-t border-gray-200">
+            <h2 class="section-title header-font font-bold mb-16 text-center">The 4 Steps of Our Collaboration</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+
+                <!-- Step 1 -->
+                <div class="bg-white-card p-6 rounded-xl shadow-lg border-t-4 border-primary-dark hover:shadow-2xl transition duration-300">
+                    <p class="text-5xl font-serif font-bold mb-3 text-primary-dark opacity-20">01</p>
+                    <h3 class="text-xl font-semibold mb-3">Understanding the Goals</h3>
+                    <p class="text-sm text-mid-gray">Determine the **commercial and creative goals** of the client (individual, company) to ensure a complete convergence of views and project objectives.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-white-card p-6 rounded-xl shadow-lg border-t-4 border-primary-dark hover:shadow-2xl transition duration-300">
+                    <p class="text-5xl font-serif font-bold mb-3 text-primary-dark opacity-20">02</p>
+                    <h3 class="text-xl font-semibold mb-3">Guiding Examples & Vision</h3>
+                    <p class="text-sm text-mid-gray">Collect approximate business models, define the **appropriate color palette, genre** (classic, modern, dramatic), and the general atmosphere required.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-white-card p-6 rounded-xl shadow-lg border-t-4 border-primary-dark hover:shadow-2xl transition duration-300">
+                    <p class="text-5xl font-serif font-bold mb-3 text-primary-dark opacity-20">03</p>
+                    <h3 class="text-xl font-semibold mb-3">Planning & Preparation</h3>
+                    <p class="text-sm text-mid-gray">Gather all project elements: actors, accessories, decor, technical personnel, equipment, filming locations, and finalize the **timeline and delivery dates.**</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="bg-white-card p-6 rounded-xl shadow-lg border-t-4 border-primary-dark hover:shadow-2xl transition duration-300">
+                    <p class="text-sm text-mid-gray">Full commitment, post-production (**montage, effects, retouching**), content review, and improving the final storytelling quality.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Contact Me -->
+        <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 border-t border-gray-200 text-center">
+            <h2 class="section-title header-font font-bold mb-6">Let's Create Something Impactful.</h2>
+            <p class="text-xl text-mid-gray mb-10 max-w-2xl mx-auto">
+                For commercial inquiries, high-end retouching projects, or collaborative artistic work, contact me directly.
+            </p>
+            <a href="mailto:medaliwergli@example.com" class="px-8 py-4 bg-primary-dark text-white text-lg font-semibold rounded-xl hover:bg-black transition duration-300 shadow-xl inline-block transform hover:scale-105">
+                Contact Mohamedali Werghili
+            </a>
+            <p class="text-sm mt-4 text-mid-gray">
+                medaliwergli@example.com
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="mt-20 py-8 text-center border-t border-gray-200 bg-white-card">
+        <p class="text-sm text-mid-gray">&copy; 2025 MEDALIWERGLI. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button onclick="scrollToTop()" id="scrollTopBtn" title="Go to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript for Scroll to Top functionality -->
+    <script>
+        // Get the button
+        const mybutton = document.getElementById("scrollTopBtn");
+
+        // When the user scrolls down 200px from the top of the document, show the button
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+</html>
+
