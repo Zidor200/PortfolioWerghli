@@ -47,7 +47,7 @@ const Values = () => {
                 </div>
                 <div className="relative bg-white rounded-lg overflow-hidden shadow-xl aspect-[3/4]">
                   <img
-                    src="https://placehold.co/300x400/2d3748/ffffff?text=DAY+75"
+                    src="/images/day75.jpg"
                     alt="Day 75 Self Portrait"
                     className="w-full h-full object-cover"
                   />
@@ -61,7 +61,7 @@ const Values = () => {
                 </div>
                 <div className="relative bg-white rounded-lg overflow-hidden shadow-xl aspect-[3/4]">
                   <img
-                    src="https://placehold.co/300x400/065f46/ffffff?text=DAY+76"
+                    src="/images/day76.jpg"
                     alt="Day 76 Self Portrait"
                     className="w-full h-full object-cover"
                   />
@@ -75,7 +75,7 @@ const Values = () => {
                 </div>
                 <div className="relative bg-white rounded-lg overflow-hidden shadow-xl aspect-[3/4]">
                   <img
-                    src="https://placehold.co/300x400/1e40af/ffffff?text=DAY+13"
+                    src="/images/DAY13.jpg"
                     alt="Day 13 Self Portrait"
                     className="w-full h-full object-cover"
                   />

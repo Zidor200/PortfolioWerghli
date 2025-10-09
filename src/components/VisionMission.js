@@ -9,7 +9,7 @@ const VisionMission = () => {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: "url('https://placehold.co/1200x800/8b5a2b/ffffff?text=RUgged+Landscape+Vision')"
+            backgroundImage: "url('/images/DAY95.jpg')"
           }}
         />
 
@@ -35,7 +35,7 @@ const VisionMission = () => {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: "url('https://placehold.co/1200x800/1e40af/ffffff?text=Mountain+Lake+Mission')"
+            backgroundImage: "url('/images/day71.jpg')"
           }}
         />
 

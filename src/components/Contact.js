@@ -8,14 +8,19 @@ const Contact = () => {
         For commercial inquiries, high-end retouching projects, or collaborative artistic work, contact me directly.
       </p>
       <a
-        href="mailto:medaliwergli@example.com"
+        href="mailto:dd4825520@gmail.com"
         className="px-6 sm:px-8 py-3 sm:py-4 bg-primary-dark text-white text-sm sm:text-base md:text-lg font-semibold rounded-lg sm:rounded-xl hover:bg-black transition duration-300 shadow-xl inline-block transform hover:scale-105"
       >
         Contact Mohamedali Werghili
       </a>
-      <p className="text-xs sm:text-sm mt-3 sm:mt-4 text-mid-gray">
-        medaliwergli@example.com
-      </p>
+      <div className="mt-4 sm:mt-6 text-xs sm:text-sm text-mid-gray space-y-2">
+        <p>
+          <strong>Email:</strong> dd4825520@gmail.com
+        </p>
+        <p>
+          <strong>Phone:</strong> +216 27 121 917
+        </p>
+      </div>
     </section>
   );
 };

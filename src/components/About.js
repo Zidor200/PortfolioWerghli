@@ -9,7 +9,7 @@ const About = () => {
           <div className="order-2 lg:order-1">
             <div className="relative">
               <img
-                src="https://placehold.co/500x600/f5f5f5/333333?text=MEDALI+WERGLI+PORTRAIT"
+                src="/images/IMG_8586-1.jpg"
                 alt="Medali Wergli portrait"
                 className="w-full h-auto object-cover rounded-lg shadow-2xl"
               />
