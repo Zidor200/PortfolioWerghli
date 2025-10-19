@@ -1,4 +1,5 @@
 import React from 'react';
+import OptimizedImage from './OptimizedImage';
 
 const About = () => {
   return (
@@ -8,13 +9,17 @@ const About = () => {
           {/* Left Column - Portrait Image */}
           <div className="order-2 lg:order-1">
             <div className="relative">
-              <img
+              <OptimizedImage
                 src="/images/IMG_8586-1.jpg"
                 alt="Medali Wergli portrait"
-                className="w-full h-auto object-cover rounded-lg shadow-2xl"
+                className="w-full h-auto rounded-lg shadow-2xl"
+                enableZoom={true}
+                title="Medali Wergli Portrait"
+                preserveAspectRatio={false}
+                fillContainer={true}
               />
               {/* Background effect overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-white/20 rounded-lg"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-white/20 rounded-lg pointer-events-none"></div>
             </div>
           </div>
 
@@ -32,7 +37,7 @@ const About = () => {
                   PRESENTATION
                 </h3>
                 <p className="text-sm sm:text-base md:text-lg text-primary-dark leading-relaxed">
-                  Salam I'm mohamedaliwergli I'm excited to share my self-portrait with you. This piece is a reflection of who I am, my emotions, and my journey. Creating a self-portrait has been a deeply personal and introspective process, and I'm thrilled to walk you through the inspiration, symbolism, and techniques behind it.
+                  Salam I'm mohamed ali wergli I'm excited to share my self-portrait with you. This piece is a reflection of who I am, my emotions, and my journey. Creating a self-portrait has been a deeply personal and introspective process, and I'm thrilled to walk you through the inspiration, symbolism, and techniques behind it.
                 </p>
               </div>
 

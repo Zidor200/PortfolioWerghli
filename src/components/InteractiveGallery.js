@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 
-const InteractiveGallery = ({ photos = [] }) => {
+const InteractiveGallery = ({ photos = [], onShowFullGallery }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [loadedImages, setLoadedImages] = useState(new Set([0])); // Track loaded images
+  const [zoomedImage, setZoomedImage] = useState(null); // Track which image is zoomed
 
   // Generate placeholder photos if none provided with spread X/Y/Z positions
   const generatePlaceholderPhotos = () => {
@@ -35,23 +37,85 @@ const InteractiveGallery = ({ photos = [] }) => {
 
   const displayPhotos = photos.length > 0 ? photos : generatePlaceholderPhotos();
 
-  // Click anywhere to cycle to next photo
-  const handleBodyClick = () => {
+  // Preload adjacent images for smooth transitions
+  useEffect(() => {
+    const preloadIndices = [
+      currentImageIndex,
+      (currentImageIndex + 1) % displayPhotos.length,
+      (currentImageIndex - 1 + displayPhotos.length) % displayPhotos.length,
+      (currentImageIndex + 2) % displayPhotos.length,
+      (currentImageIndex - 2 + displayPhotos.length) % displayPhotos.length
+    ];
+
+    preloadIndices.forEach(index => {
+      if (!loadedImages.has(index)) {
+        const img = new Image();
+        img.src = displayPhotos[index].src;
+        img.onload = () => {
+          setLoadedImages(prev => new Set([...prev, index]));
+        };
+      }
+    });
+  }, [currentImageIndex, displayPhotos, loadedImages]);
+
+  // Only render images within a certain range of the current image for performance
+  const visibleImageIndices = useMemo(() => {
+    const range = 5; // Render current + 5 images on each side
+    const indices = new Set();
+    for (let i = -range; i <= range; i++) {
+      const index = (currentImageIndex + i + displayPhotos.length) % displayPhotos.length;
+      indices.add(index);
+    }
+    return indices;
+  }, [currentImageIndex, displayPhotos.length]);
+
+  // Navigate to next photo
+  const handleNext = useCallback((e) => {
+    if (e) e.stopPropagation(); // Prevent body click handler
     if (isTransitioning) return;
     setIsTransitioning(true);
     const nextIndex = (currentImageIndex + 1) % displayPhotos.length;
     setCurrentImageIndex(nextIndex);
     setTimeout(() => setIsTransitioning(false), 600);
-  };
+  }, [isTransitioning, currentImageIndex, displayPhotos.length]);
+
+  // Navigate to previous photo
+  const handlePrevious = useCallback((e) => {
+    if (e) e.stopPropagation(); // Prevent body click handler
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    const prevIndex = (currentImageIndex - 1 + displayPhotos.length) % displayPhotos.length;
+    setCurrentImageIndex(prevIndex);
+    setTimeout(() => setIsTransitioning(false), 600);
+  }, [isTransitioning, currentImageIndex, displayPhotos.length]);
+
+  // Handle image click to zoom
+  const handleImageClick = useCallback((photo, e) => {
+    e.stopPropagation(); // Prevent body click handler
+    setZoomedImage(photo);
+  }, []);
+
+  // Close zoomed image
+  const closeZoom = useCallback((e) => {
+    e.stopPropagation();
+    setZoomedImage(null);
+  }, []);
 
   useEffect(() => {
+    // Click anywhere to cycle to next photo (only if no zoomed image)
+    const handleBodyClick = () => {
+      if (!zoomedImage) {
+        handleNext();
+      }
+    };
+
     // Add click listener to body
     document.body.addEventListener('click', handleBodyClick);
 
     return () => {
       document.body.removeEventListener('click', handleBodyClick);
     };
-  }, [currentImageIndex, isTransitioning]);
+  }, [currentImageIndex, isTransitioning, handleNext, zoomedImage]);
 
   // Calculate image styles based on current focus
   const getImageStyle = (photo, index) => {
@@ -113,59 +177,93 @@ const InteractiveGallery = ({ photos = [] }) => {
           backgroundColor: '#f8f9fa'
         }}
       >
-        {/* Floating Photos */}
-        {displayPhotos.map((photo, index) => (
-          <div
-            key={photo.id}
-            className="photo-frame"
-            style={{
-              ...getImageStyle(photo, index),
-              left: '50%',
-              top: '50%',
-              marginLeft: '-200px',
-              marginTop: '-250px'
-            }}
-          >
+        {/* Floating Photos - Only render visible images */}
+        {displayPhotos.map((photo, index) => {
+          // Skip rendering images outside the visible range
+          if (!visibleImageIndices.has(index)) return null;
+
+          const isLoaded = loadedImages.has(index);
+
+          return (
             <div
-              className="photo-image"
+              key={photo.id}
+              className="photo-frame"
               style={{
-                width: '100%',
-                height: '100%',
-                borderRadius: '12px',
-                boxShadow: '0 20px 40px rgba(0, 0, 0, 0.15)',
-                overflow: 'hidden',
-                backgroundColor: 'white'
+                ...getImageStyle(photo, index),
+                left: '50%',
+                top: '50%',
+                marginLeft: '-200px',
+                marginTop: '-250px'
               }}
             >
-              <img
-                src={photo.src}
-                alt={photo.alt}
+              <div
+                className="photo-image"
+                onClick={(e) => handleImageClick(photo, e)}
                 style={{
                   width: '100%',
                   height: '100%',
-                  objectFit: 'cover',
-                  display: 'block'
+                  borderRadius: '12px',
+                  boxShadow: '0 20px 40px rgba(0, 0, 0, 0.15)',
+                  overflow: 'hidden',
+                  backgroundColor: isLoaded ? 'white' : '#f0f0f0',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  transition: 'transform 0.2s ease',
                 }}
-              />
-              <div
-                className="photo-label"
-                style={{
-                  position: 'absolute',
-                  bottom: '12px',
-                  left: '12px',
-                  backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                  color: 'white',
-                  padding: '6px 12px',
-                  borderRadius: '6px',
-                  fontSize: '14px',
-                  fontWeight: '600'
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.05)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
                 }}
               >
-                DAY {photo.day}
+                {isLoaded ? (
+                  <img
+                    src={photo.src}
+                    alt={photo.alt}
+                    loading="lazy"
+                    decoding="async"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      display: 'block',
+                      // Mobile-specific improvements for aspect ratio
+                      objectPosition: 'center',
+                      maxWidth: '100%',
+                      maxHeight: '100%'
+                    }}
+                  />
+                ) : (
+                  <div style={{
+                    color: '#999',
+                    fontSize: '14px'
+                  }}>
+                    Loading...
+                  </div>
+                )}
+                <div
+                  className="photo-label"
+                  style={{
+                    position: 'absolute',
+                    bottom: '12px',
+                    left: '12px',
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    color: 'white',
+                    padding: '6px 12px',
+                    borderRadius: '6px',
+                    fontSize: '14px',
+                    fontWeight: '600'
+                  }}
+                >
+                  DAY {photo.day}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
 
         {/* Instructions */}
         <div
@@ -203,7 +301,261 @@ const InteractiveGallery = ({ photos = [] }) => {
         >
           {currentImageIndex + 1} / {displayPhotos.length}
         </div>
+
+        {/* View Full Gallery Button */}
+        {onShowFullGallery && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onShowFullGallery();
+            }}
+            style={{
+              position: 'absolute',
+              bottom: '20px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              backgroundColor: 'rgba(0, 0, 0, 0.9)',
+              color: 'white',
+              border: '2px solid white',
+              borderRadius: '8px',
+              padding: '12px 24px',
+              fontSize: '14px',
+              fontWeight: '600',
+              cursor: 'pointer',
+              pointerEvents: 'auto',
+              transition: 'all 0.3s ease',
+              zIndex: 200
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'white';
+              e.currentTarget.style.color = 'black';
+              e.currentTarget.style.transform = 'translateX(-50%) scale(1.05)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+              e.currentTarget.style.color = 'white';
+              e.currentTarget.style.transform = 'translateX(-50%) scale(1)';
+            }}
+          >
+            View All Photos Gallery →
+          </button>
+        )}
+
+        {/* Navigation Arrows */}
+        {/* Previous Arrow */}
+        <button
+          onClick={handlePrevious}
+          disabled={isTransitioning}
+          style={{
+            position: 'absolute',
+            left: '20px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            color: 'white',
+            border: 'none',
+            borderRadius: '50%',
+            width: '50px',
+            height: '50px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: isTransitioning ? 'not-allowed' : 'pointer',
+            pointerEvents: 'auto',
+            fontSize: '24px',
+            fontWeight: 'bold',
+            transition: 'all 0.3s ease',
+            opacity: isTransitioning ? 0.5 : 1,
+            zIndex: 200
+          }}
+          onMouseEnter={(e) => {
+            if (!isTransitioning) {
+              e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
+              e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)';
+            }
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
+          }}
+          aria-label="Previous photo"
+        >
+          ←
+        </button>
+
+        {/* Next Arrow */}
+        <button
+          onClick={handleNext}
+          disabled={isTransitioning}
+          style={{
+            position: 'absolute',
+            right: '20px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            color: 'white',
+            border: 'none',
+            borderRadius: '50%',
+            width: '50px',
+            height: '50px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: isTransitioning ? 'not-allowed' : 'pointer',
+            pointerEvents: 'auto',
+            fontSize: '24px',
+            fontWeight: 'bold',
+            transition: 'all 0.3s ease',
+            opacity: isTransitioning ? 0.5 : 1,
+            zIndex: 200
+          }}
+          onMouseEnter={(e) => {
+            if (!isTransitioning) {
+              e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
+              e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)';
+            }
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
+          }}
+          aria-label="Next photo"
+        >
+          →
+        </button>
       </section>
+
+      {/* Zoomed Image Modal */}
+      {zoomedImage && (
+        <div
+          onClick={closeZoom}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.95)',
+            backdropFilter: 'blur(10px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1000,
+            cursor: 'pointer',
+            animation: 'fadeIn 0.3s ease-in-out'
+          }}
+        >
+          <style>
+            {`
+              @keyframes fadeIn {
+                from {
+                  opacity: 0;
+                }
+                to {
+                  opacity: 1;
+                }
+              }
+              @keyframes zoomIn {
+                from {
+                  transform: scale(0.8);
+                  opacity: 0;
+                }
+                to {
+                  transform: scale(1);
+                  opacity: 1;
+                }
+              }
+            `}
+          </style>
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              position: 'relative',
+              maxWidth: '90vw',
+              maxHeight: '90vh',
+              animation: 'zoomIn 0.3s ease-out'
+            }}
+          >
+            {/* Close button */}
+            <button
+              onClick={closeZoom}
+              style={{
+                position: 'absolute',
+                top: '-50px',
+                right: '0',
+                backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                color: '#000',
+                border: 'none',
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px',
+                fontSize: '24px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.2s ease',
+                zIndex: 1001
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'white';
+                e.currentTarget.style.transform = 'scale(1.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+                e.currentTarget.style.transform = 'scale(1)';
+              }}
+              aria-label="Close"
+            >
+              ×
+            </button>
+
+            {/* Zoomed image */}
+            <img
+              src={zoomedImage.src}
+              alt={zoomedImage.alt}
+              style={{
+                maxWidth: '90vw',
+                maxHeight: '90vh',
+                width: 'auto',
+                height: 'auto',
+                borderRadius: '12px',
+                boxShadow: '0 30px 60px rgba(0, 0, 0, 0.5)',
+                objectFit: 'contain',
+                // Mobile-specific improvements for preserveAspectRatio
+                objectPosition: 'center',
+                preserveAspectRatio: 'xMidYMid meet'
+              }}
+            />
+
+            {/* Image info */}
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '-60px',
+                left: '0',
+                right: '0',
+                textAlign: 'center',
+                color: 'white',
+                fontSize: '18px',
+                fontWeight: '600'
+              }}
+            >
+              <div
+                style={{
+                  backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                  padding: '12px 24px',
+                  borderRadius: '8px',
+                  display: 'inline-block'
+                }}
+              >
+                {zoomedImage.title} - DAY {zoomedImage.day}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

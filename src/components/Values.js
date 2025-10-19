@@ -1,4 +1,5 @@
 import React from 'react';
+import OptimizedImage from './OptimizedImage';
 
 const Values = () => {
   return (
@@ -46,10 +47,15 @@ const Values = () => {
                   DAY 75
                 </div>
                 <div className="relative bg-white rounded-lg overflow-hidden shadow-xl aspect-[3/4]">
-                  <img
+                  <OptimizedImage
                     src="/images/day75.jpg"
                     alt="Day 75 Self Portrait"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full"
+                    enableZoom={true}
+                    title="Self Portrait 75"
+                    photoData={{ day: 75 }}
+                    preserveAspectRatio={false}
+                    fillContainer={true}
                   />
                 </div>
               </div>
@@ -60,10 +66,15 @@ const Values = () => {
                   DAY 76
                 </div>
                 <div className="relative bg-white rounded-lg overflow-hidden shadow-xl aspect-[3/4]">
-                  <img
+                  <OptimizedImage
                     src="/images/day76.jpg"
                     alt="Day 76 Self Portrait"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full"
+                    enableZoom={true}
+                    title="Self Portrait 76"
+                    photoData={{ day: 76 }}
+                    preserveAspectRatio={false}
+                    fillContainer={true}
                   />
                 </div>
               </div>
@@ -74,10 +85,15 @@ const Values = () => {
                   DAY 13
                 </div>
                 <div className="relative bg-white rounded-lg overflow-hidden shadow-xl aspect-[3/4]">
-                  <img
+                  <OptimizedImage
                     src="/images/DAY13.jpg"
                     alt="Day 13 Self Portrait"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full"
+                    enableZoom={true}
+                    title="Self Portrait 13"
+                    photoData={{ day: 13 }}
+                    preserveAspectRatio={false}
+                    fillContainer={true}
                   />
                 </div>
               </div>

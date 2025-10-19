@@ -1,4 +1,5 @@
 import React from 'react';
+import OptimizedImage from './OptimizedImage';
 import { heroPhotos } from '../data/photos';
 
 const Hero = () => {
@@ -14,10 +15,16 @@ const Hero = () => {
                   <span className="text-sm sm:text-base md:text-lg font-bold text-primary-dark">DAY {photo.day}</span>
                 </div>
                 <div className="relative bg-white rounded-lg sm:rounded-xl overflow-hidden shadow-xl aspect-square">
-                  <img
+                  <OptimizedImage
                     src={photo.src}
                     alt={photo.alt}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full"
+                    threshold={0}
+                    enableZoom={true}
+                    title={photo.title}
+                    photoData={photo}
+                    preserveAspectRatio={false}
+                    fillContainer={true}
                   />
                 </div>
               </div>
