@@ -10,7 +10,7 @@ const About = () => {
           <div className="order-2 lg:order-1">
             <div className="relative">
               <OptimizedImage
-                src="/images/IMG_8586-1.jpg"
+                src="/images/convert-results/IMG_8586-1.avif"
                 alt="Medali Wergli portrait"
                 className="w-full h-auto rounded-lg shadow-2xl"
                 enableZoom={true}

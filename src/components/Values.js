@@ -48,7 +48,7 @@ const Values = () => {
                 </div>
                 <div className="relative bg-white rounded-lg overflow-hidden shadow-xl aspect-[3/4]">
                   <OptimizedImage
-                    src="/images/day75.jpg"
+                    src="/images/convert-results/day75.avif"
                     alt="Day 75 Self Portrait"
                     className="w-full h-full"
                     enableZoom={true}
@@ -67,7 +67,7 @@ const Values = () => {
                 </div>
                 <div className="relative bg-white rounded-lg overflow-hidden shadow-xl aspect-[3/4]">
                   <OptimizedImage
-                    src="/images/day76.jpg"
+                    src="/images/convert-results/day76.avif"
                     alt="Day 76 Self Portrait"
                     className="w-full h-full"
                     enableZoom={true}
@@ -86,7 +86,7 @@ const Values = () => {
                 </div>
                 <div className="relative bg-white rounded-lg overflow-hidden shadow-xl aspect-[3/4]">
                   <OptimizedImage
-                    src="/images/DAY13.jpg"
+                    src="/images/convert-results/DAY13.avif"
                     alt="Day 13 Self Portrait"
                     className="w-full h-full"
                     enableZoom={true}
