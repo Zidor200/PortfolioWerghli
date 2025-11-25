@@ -1,6 +1,6 @@
 # Photo System Documentation
 
-This document outlines the photo system implementation for the Mohamedali Werghli portfolio React application.
+This document outlines the photo system implementation for the Mohamedali Wergli portfolio React application.
 
 ## 📸 Photo Organization
 
@@ -201,4 +201,4 @@ export const heroPhotos = [
 
 ---
 
-This photo system provides a robust, scalable foundation for showcasing Mohamedali Werghli's complete self-portrait collection while maintaining excellent performance and user experience across all devices.
+This photo system provides a robust, scalable foundation for showcasing Mohamedali Wergli's complete self-portrait collection while maintaining excellent performance and user experience across all devices.

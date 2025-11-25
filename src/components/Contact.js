@@ -11,7 +11,7 @@ const Contact = () => {
         href="mailto:dd4825520@gmail.com"
         className="px-6 sm:px-8 py-3 sm:py-4 bg-primary-dark text-white text-sm sm:text-base md:text-lg font-semibold rounded-lg sm:rounded-xl hover:bg-black transition duration-300 shadow-xl inline-block transform hover:scale-105"
       >
-        Contact Mohamedali Werghili
+        Contact Mohamed ali Wergli
       </a>
       <div className="mt-4 sm:mt-6 text-xs sm:text-sm text-mid-gray space-y-2">
         <p>

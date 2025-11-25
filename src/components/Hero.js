@@ -38,7 +38,8 @@ const Hero = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-primary-dark mb-4 sm:mb-6">
-              HELLO I'M MOHAMEDALIWERGLI
+              HELLO I'M
+              MOHAMED ALI WERGLI
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-primary-dark font-medium">
               photographer and high-end retoucher

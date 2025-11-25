@@ -1,6 +1,6 @@
-# Mohamedali Werghli - Portfolio React App
+# Mohamedali Wergli - Portfolio React App
 
-A modern, responsive portfolio website built with React for Mohamedali Werghli, a photographer and high-end retoucher. This project recreates the original HTML portfolio as a React application with improved component structure and maintainability.
+A modern, responsive portfolio website built with React for Mohamedali Wergli, a photographer and high-end retoucher. This project recreates the original HTML portfolio as a React application with improved component structure and maintainability.
 
 ## Features
 
@@ -107,7 +107,7 @@ Edit text content directly in the component files to match your specific informa
 
 ## License
 
-This project is created for Mohamedali Werghli's portfolio. All rights reserved.
+This project is created for Mohamedali Wergli's portfolio. All rights reserved.
 
 ## Contact
 

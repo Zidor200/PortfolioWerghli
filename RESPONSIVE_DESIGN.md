@@ -1,6 +1,6 @@
 # Responsive Design Implementation
 
-This document outlines the comprehensive responsive design implementation for the Mohamedali Werghli portfolio React application.
+This document outlines the comprehensive responsive design implementation for the Mohamedali Wergli portfolio React application.
 
 ## 📱 Breakpoint System
 
